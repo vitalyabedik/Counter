@@ -1,30 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import s from './Counter.module.css'
 
-import {Display} from './Display';
-import {ControlPanel} from './ControlPanel';
+import {ActiveBlock} from './ActiveBlock';
+import {SettingsBlock} from './SettingsBlock';
 
-type PropsType = {
-    count: number
-    increaseCallback: () => void
-    resetCallback: () => void
-    isDisabledIncrease: boolean
-    isDisabledReset: boolean
-}
+export const Counter: React.FC = () => {
+    const initialCounterValue = 0;
+    const maxCounterValue = 5;
 
-export const Counter: React.FC<PropsType> = (props) => {
-    const {count, increaseCallback, resetCallback, isDisabledIncrease, isDisabledReset} = props
+    const [count, setCount] = useState(initialCounterValue)
+
+    const increaseCounter = () => {
+        setCount(prev => prev + 1)
+    }
+    const resetCounter = () => {
+        setCount(initialCounterValue)
+    }
+
+    const isDisabledIncrease = count >= maxCounterValue
+    const isDisabledReset = count < 1
 
     return (
         <div className={s.root}>
-            <Display count={count} isDisabledIncrease={isDisabledIncrease}/>
-            <ControlPanel
-                increaseCallback={increaseCallback}
-                resetCallback={resetCallback}
-                isDisabledIncrease={isDisabledIncrease}
-                isDisabledReset={isDisabledReset}
-            />
+                <ActiveBlock
+                    count={count}
+                    increaseCounter={increaseCounter}
+                    resetCounter={resetCounter}
+                    isDisabledIncrease={isDisabledIncrease}
+                    isDisabledReset={isDisabledReset}
+                />
+                <SettingsBlock
+                    count={count}
+                    increaseCounter={increaseCounter}
+                    resetCounter={resetCounter}
+                    isDisabledIncrease={isDisabledIncrease}
+                    isDisabledReset={isDisabledReset}
+                />
         </div>
-    )
+)
 }

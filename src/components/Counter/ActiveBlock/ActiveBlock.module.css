@@ -1,0 +1,8 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    border: solid 5px #097f7c;
+    border-radius: 20px;
+}
