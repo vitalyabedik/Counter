@@ -1,0 +1,16 @@
+.root {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #097f7c;
+    border-radius: 20px;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.redText {
+    color: red;
+    transition: 0.3s ease-out;
+}
