@@ -1,6 +1,6 @@
 import React from 'react';
 
-import s from './SuperButton.module.css'
+import s from './Button.module.css'
 
 type PropsType = {
     name: string
@@ -9,7 +9,7 @@ type PropsType = {
     className?: string
 }
 
-export const SuperButton: React.FC<PropsType> = (props) => {
+export const Button: React.FC<PropsType> = (props) => {
     const {callBack, name, disabled, ...restProps} = props
 
     const buttonClasses = `
