@@ -1,0 +1,30 @@
+.root {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #097f7c;
+    border: solid 5px #097f7c;
+    border-radius: 20px;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.span {
+    display: block;
+    text-align: center;
+    font-size: 30px;
+}
+
+.redTextSpan {
+    text-align: center;
+    font-size: 30px;
+    color: red;
+    transition: 0.3s ease-out;
+}
+
+.redTextCounter {
+    color: red;
+    transition: 0.3s ease-out;
+}

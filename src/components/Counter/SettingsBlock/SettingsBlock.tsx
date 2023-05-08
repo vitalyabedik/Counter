@@ -2,29 +2,48 @@ import React from 'react';
 
 import s from './SettingsBlock.module.css'
 
-import {DisplayContainer} from '../DisplayContainer';
 import {ControlPanelContainer} from '../ControlPanelContainer';
-import {SuperButton} from '../../SuperButton';
+import {Button} from '../../UI/Button';
+import {Options} from './Options';
 
 type PropsType = {
-    count: number
-    increaseCounter: () => void
-    resetCounter: () => void
-    isDisabledIncrease: boolean
-    isDisabledReset: boolean
+    startValue: number
+    maxValue: number
+    changeStartValue: (value: number) => void
+    changeMaxValue: (value: number) => void
+    setSettings: (newStartValue: number, newMaxValue: number) => void
+    isDisabledSet: boolean
+    isCorrectStartValue: boolean
+    isCorrectMaxAndStartValues: boolean
 }
 
 export const SettingsBlock: React.FC<PropsType> = (props) => {
-    const {count, increaseCounter, resetCounter, isDisabledIncrease, isDisabledReset} = props
+    const {
+        startValue,
+        maxValue,
+        changeMaxValue,
+        changeStartValue,
+        setSettings,
+        isDisabledSet,
+        isCorrectStartValue,
+        isCorrectMaxAndStartValues
+    } = props
+
+    const onClickSetSettingsHandler = () => {
+        setSettings(startValue, maxValue)
+    }
 
     return (
         <div className={s.root}>
-            <DisplayContainer isDisabledIncrease={isDisabledIncrease}>
-                {count}
-            </DisplayContainer>
+            <Options startValue={startValue}
+                     maxValue={maxValue}
+                     changeStartValue={changeStartValue}
+                     changeMaxValue={changeMaxValue}
+                     isCorrectStartValue={isCorrectStartValue}
+                     isCorrectMaxAndStartValues={isCorrectMaxAndStartValues}
+            />
             <ControlPanelContainer>
-                <SuperButton disabled={isDisabledIncrease} name={'inc'} callBack={increaseCounter}/>
-                <SuperButton disabled={isDisabledReset} name={'reset'} callBack={resetCounter}/>
+                <Button disabled={isDisabledSet} name={'set'} callBack={onClickSetSettingsHandler}/>
             </ControlPanelContainer>
         </div>
     )
