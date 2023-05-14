@@ -2,7 +2,7 @@ import React from 'react';
 
 import s from './ActiveBlock.module.css'
 
-import {Display} from './Display';
+import {Display, typeOfDisplay} from './Display';
 import {ControlPanelContainer} from '../ControlPanelContainer';
 import {Button} from '../../UI/Button';
 
@@ -12,10 +12,7 @@ type PropsType = {
     resetCounter: () => void
     isDisabledIncrease: boolean
     isDisabledReset: boolean
-    isDefaultOptionValues: boolean
-    isCorrectOptionSettings: boolean
-    isCorrectStartValue: boolean
-    isCorrectMaxAndStartValues: boolean
+    typeDisplay: typeOfDisplay,
 }
 
 export const ActiveBlock: React.FC<PropsType> = (props) => {
@@ -25,18 +22,14 @@ export const ActiveBlock: React.FC<PropsType> = (props) => {
         resetCounter,
         isDisabledIncrease,
         isDisabledReset,
-        isDefaultOptionValues,
-        isCorrectStartValue,
-        isCorrectMaxAndStartValues
+        typeDisplay,
     } = props
 
     return (
         <div className={s.root}>
             <Display count={count}
                      isDisabledIncrease={isDisabledIncrease}
-                     isDefaultOptionValues={isDefaultOptionValues}
-                     isCorrectStartValue={isCorrectStartValue}
-                     isCorrectMaxAndStartValues={isCorrectMaxAndStartValues}
+                     typeDisplay={typeDisplay}
             />
             <ControlPanelContainer>
                 <Button disabled={isDisabledIncrease} name={'inc'} callBack={increaseCounter}/>

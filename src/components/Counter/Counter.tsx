@@ -4,6 +4,8 @@ import s from './Counter.module.css'
 
 import {ActiveBlock} from './ActiveBlock';
 import {SettingsBlock} from './SettingsBlock';
+import {getValueFromLocalStorage, setValueToLocalStorage} from '../../utils';
+import {typeOfDisplay} from './ActiveBlock/Display';
 
 export const Counter: React.FC = () => {
     const initialStartValue = 0;
@@ -12,6 +14,13 @@ export const Counter: React.FC = () => {
     const [startValue, setStartValue] = useState(initialStartValue)
     const [maxValue, setMaxValue] = useState(initialMaxValue)
     const [count, setCount] = useState(startValue)
+    const [typeDisplay, setTypeDisplay] = useState<typeOfDisplay>('counter')
+
+    useEffect(() => {
+        getValueFromLocalStorage('startCounterValue', setStartValue)
+        getValueFromLocalStorage('startCounterValue', setCount)
+        getValueFromLocalStorage('maxCounterValue', setMaxValue)
+    }, [])
 
     const increaseCounter = () => {
         setCount(prev => prev + 1)
@@ -20,27 +29,47 @@ export const Counter: React.FC = () => {
         setCount(startValue)
     }
     const changeStartValue = (newStartValue: number) => {
-        setStartValue(newStartValue )
+        if (newStartValue <= 0 || newStartValue > maxValue){
+            setTypeDisplay('error')
+            setStartValue(newStartValue )
+        }else {
+            setStartValue(newStartValue )
+            setTypeDisplay('info')
+        }
+
     }
     const changeMaxValue = (newMaxValue: number) => {
-        setMaxValue(newMaxValue )
+        if (newMaxValue < 0 || newMaxValue <= startValue){
+            setTypeDisplay('error')
+            setMaxValue(newMaxValue )
+        }else {
+            setMaxValue(newMaxValue )
+            setTypeDisplay('info')
+        }
+
     }
     const setSettings = (newStartValue: number, newMaxValue: number) => {
         setCount(newStartValue)
         changeStartValue(newStartValue)
         changeMaxValue(newMaxValue)
+        setValueToLocalStorage('startCounterValue', newStartValue)
+        setValueToLocalStorage('maxCounterValue', newMaxValue)
+        setTypeDisplay('counter')
     }
 
-    // useEffect(() => {
-    //     setSettings(startValue, maxValue)
-    // }, [maxValue, startValue])
-
+    // const isDefaultOptionValues = initialStartValue !== startValue || initialMaxValue !== maxValue
+    // const isCorrectStartValue = startValue < 0
+    // const isCorrectMaxAndStartValues = startValue < maxValue
+    // const isCorrectOptionSettings = isCorrectStartValue || isCorrectMaxAndStartValues
+    //
+    // const isDisabledIncrease = count >= maxValue || !isCorrectMaxAndStartValues || isCorrectStartValue
+    // const isDisabledReset = count < 1
+    // const isDisabledSet = !isDefaultOptionValues || !isCorrectMaxAndStartValues || isCorrectStartValue
     const isDefaultOptionValues = initialStartValue !== startValue || initialMaxValue !== maxValue
     const isCorrectStartValue = startValue < 0
     const isCorrectMaxAndStartValues = startValue < maxValue
-    const isCorrectOptionSettings = isCorrectStartValue || isCorrectMaxAndStartValues
 
-    const isDisabledIncrease = count >= maxValue || !isCorrectMaxAndStartValues || isCorrectStartValue
+    const isDisabledIncrease = count >= maxValue || typeDisplay === 'error' || typeDisplay === 'info'
     const isDisabledReset = count < 1
     const isDisabledSet = !isDefaultOptionValues || !isCorrectMaxAndStartValues || isCorrectStartValue
 
@@ -58,14 +87,11 @@ export const Counter: React.FC = () => {
             />
             <ActiveBlock
                 count={count}
-                increaseCounter={increaseCounter}
-                resetCounter={resetCounter}
+                typeDisplay={typeDisplay}
                 isDisabledIncrease={isDisabledIncrease}
                 isDisabledReset={isDisabledReset}
-                isDefaultOptionValues={isDefaultOptionValues}
-                isCorrectOptionSettings={isCorrectOptionSettings}
-                isCorrectStartValue={isCorrectStartValue}
-                isCorrectMaxAndStartValues={isCorrectMaxAndStartValues}
+                resetCounter={resetCounter}
+                increaseCounter={increaseCounter}
             />
         </div>
     )

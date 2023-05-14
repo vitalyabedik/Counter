@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 
 import s from './Input.module.css'
 
@@ -18,6 +18,7 @@ export const Input: React.FC<PropsType> = (props) => {
 
     const inputClasses = `
     ${s.default}
+    ${s.input}
     ${restProps.className}
     `
     return (

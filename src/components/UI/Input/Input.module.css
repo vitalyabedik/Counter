@@ -1,17 +1,19 @@
-.button {
-    padding: 10px 40px;
+.input {
+    width: 150px;
+    text-align: center;
     border-radius: 8px;
     border: none;
-    font-size: 26px;
-    overflow: hidden;
+    font-size: 16px;
     outline: none;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s ease-out;
+}
+
+.input:focus {
+    opacity: 0.9;
+    border: solid 4px #097f7c;
 }
 
 .default {
-    background-color: #097f7c;
+    border: solid 3px #097f7c;
 }
 
 .button:not([disabled]):hover {
