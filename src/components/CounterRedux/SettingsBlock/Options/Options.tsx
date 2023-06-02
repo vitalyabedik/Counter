@@ -4,29 +4,29 @@ import s from './Options.module.css'
 
 import {Input} from '../../../UI';
 
+import {useSelector} from 'react-redux';
+import {
+    counterMaxValueSelector,
+    counterStartValueSelector,
+} from '../../../../redux/selectors/counter-selector';
+
 type PropsType = {
-    startValue: number
-    maxValue: number
     changeStartValue: (value: number) => void
     changeMaxValue: (value: number) => void
     isCorrectStartValue: boolean
     isCorrectMaxAndStartValues: boolean
 }
 
-
-
 export const Options: React.FC<PropsType> = (props) => {
     const {
-        startValue,
-        maxValue,
-        changeMaxValue,
         changeStartValue,
+        changeMaxValue,
         isCorrectStartValue,
         isCorrectMaxAndStartValues
     } = props
 
-    const maxInputValue = String(maxValue)
-    const startInputValue = String(startValue)
+    const startValue = useSelector(counterStartValueSelector)
+    const maxValue = useSelector(counterMaxValueSelector)
 
     const onChangeMaxValueHandler = (newMaxValue: string) => {
         changeMaxValue(Number(newMaxValue))
@@ -34,8 +34,6 @@ export const Options: React.FC<PropsType> = (props) => {
     const onChangeStartValueHandler = (newStartValue: string) => {
         changeStartValue(Number(newStartValue))
     }
-
-
 
     const startValueInputClasses = !isCorrectMaxAndStartValues || isCorrectStartValue ? s.errorInput : ''
     const maxValueInputClasses = !isCorrectMaxAndStartValues ? s.errorInput : ''
@@ -45,11 +43,11 @@ export const Options: React.FC<PropsType> = (props) => {
             <div className={s.items}>
                 <div className={s.item}>
                     <div className={s.item__text}>max value:</div>
-                    <Input className={maxValueInputClasses} value={maxInputValue} callBack={(e) => onChangeMaxValueHandler(e)}/>
+                    <Input className={maxValueInputClasses} value={maxValue} callBack={(e) => onChangeMaxValueHandler(e)}/>
                 </div>
                 <div className={s.item}>
                     <div className={s.item__text}>start value:</div>
-                    <Input className={startValueInputClasses} value={startInputValue} callBack={(e) => onChangeStartValueHandler(e)}/>
+                    <Input className={startValueInputClasses} value={startValue} callBack={(e) => onChangeStartValueHandler(e)}/>
                 </div>
             </div>
         </div>

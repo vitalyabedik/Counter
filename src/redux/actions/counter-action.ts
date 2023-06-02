@@ -5,7 +5,7 @@ import {
     COUNTER_SET_START_VALUE,
     COUNTER_SET_MAX_VALUE
 } from './action-types';
-import {typeOfDisplay} from '../../components/Counter/ActiveBlock/Display';
+import {typeOfDisplay} from '../../components/CounterRedux/ActiveBlock/Display';
 
 export type CounterActionsType = SetCounterValueTypeAC
     | SetDisplayViewTypeAC

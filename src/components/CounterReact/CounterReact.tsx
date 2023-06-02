@@ -7,7 +7,7 @@ import {SettingsBlock} from './SettingsBlock';
 import {getValueFromLocalStorage, setValueToLocalStorage} from '../../utils';
 import {typeOfDisplay} from './ActiveBlock/Display';
 
-export const Counter: React.FC = () => {
+export const CounterReact: React.FC = () => {
     const initialStartValue = 0;
     const initialMaxValue = 5;
 

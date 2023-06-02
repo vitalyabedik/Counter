@@ -1,5 +1,5 @@
 import {CounterActionsType} from '../actions/counter-action';
-import {typeOfDisplay} from '../../components/Counter/ActiveBlock/Display';
+import {typeOfDisplay} from '../../components/CounterRedux/ActiveBlock/Display';
 import {
     COUNTER_SET_VALUE,
     COUNTER_SET_DISPLAY_VIEW,
