@@ -25,24 +25,22 @@ export const SettingsBlock: React.FC = () => {
 
     const dispatch = useDispatch()
 
-    const changeStartValue = (newStartValue: number) => {
-        if (newStartValue < 0 || newStartValue > maxValue) {
+    const setDisplayView = (condition: boolean) => {
+        if (condition) {
             dispatch(setDisplayViewAC('error'))
-            dispatch(setCounterStartValueAC(newStartValue))
         } else {
-            dispatch(setCounterStartValueAC(newStartValue))
             dispatch(setDisplayViewAC('info'))
         }
     }
 
+    const changeStartValue = (newStartValue: number) => {
+        setDisplayView(newStartValue < 0 || newStartValue > maxValue)
+        dispatch(setCounterStartValueAC(newStartValue))
+    }
+
     const changeMaxValue = (newMaxValue: number) => {
-        if (newMaxValue < 0 || newMaxValue <= startValue) {
-            dispatch(setDisplayViewAC('error'))
-            dispatch(setCounterMaxValueAC(newMaxValue))
-        } else {
-            dispatch(setCounterMaxValueAC(newMaxValue))
-            dispatch(setDisplayViewAC('info'))
-        }
+        setDisplayView((newMaxValue < 0 || newMaxValue <= startValue))
+        dispatch(setCounterMaxValueAC(newMaxValue))
     }
 
     const onClickSetSettingsHandler = () => {

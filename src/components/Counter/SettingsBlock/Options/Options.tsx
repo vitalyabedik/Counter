@@ -27,12 +27,10 @@ export const Options: React.FC<PropsType> = (props) => {
     const startValue = useSelector(counterStartValueSelector)
     const maxValue = useSelector(counterMaxValueSelector)
 
-    const maxInputValue = String(maxValue)
-    const startInputValue = String(startValue)
-
     const onChangeMaxValueHandler = (newMaxValue: string) => {
         changeMaxValue(Number(newMaxValue))
     }
+
     const onChangeStartValueHandler = (newStartValue: string) => {
         changeStartValue(Number(newStartValue))
     }
@@ -45,11 +43,11 @@ export const Options: React.FC<PropsType> = (props) => {
             <div className={s.items}>
                 <div className={s.item}>
                     <div className={s.item__text}>max value:</div>
-                    <Input className={maxValueInputClasses} value={maxInputValue} callBack={(e) => onChangeMaxValueHandler(e)}/>
+                    <Input className={maxValueInputClasses} value={maxValue} callBack={(e) => onChangeMaxValueHandler(e)}/>
                 </div>
                 <div className={s.item}>
                     <div className={s.item__text}>start value:</div>
-                    <Input className={startValueInputClasses} value={startInputValue} callBack={(e) => onChangeStartValueHandler(e)}/>
+                    <Input className={startValueInputClasses} value={startValue} callBack={(e) => onChangeStartValueHandler(e)}/>
                 </div>
             </div>
         </div>

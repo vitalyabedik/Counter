@@ -3,7 +3,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Input.module.css'
 
 type PropsType = {
-    value: string
+    value: string | number
     callBack: (e: string) => void
     className?: string
     type?: string

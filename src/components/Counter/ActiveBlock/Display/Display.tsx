@@ -10,9 +10,7 @@ type PropsType = {
     isDisabledIncrease : boolean
 }
 
-export const Display: React.FC<PropsType> = (props) => {
-    const {isDisabledIncrease} = props
-
+export const Display: React.FC<PropsType> = ({isDisabledIncrease}) => {
     const counterValue = useSelector(counterValueSelector)
     const display = useSelector(counterDisplaySelector)
 
